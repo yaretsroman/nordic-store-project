@@ -6,7 +6,7 @@ export const handlebars = () => {
         transform: (fileContent, fileName) => {
             if (templateExtensionRegExp.test(fileName)) {
                 return {
-                    code: `export default function template(props = {}){ retur \`${fileContent}\`}`,
+                    code: `export default function template(props = {}){ return \`${fileContent}\`}`,
                     map: null,
                 };
             }

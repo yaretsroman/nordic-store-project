@@ -1,12 +1,12 @@
 import { Component } from '../../core/Component'
-import { template } from './router-link.template.hbs';
+import template from './router-link.template.hbs';
 import { eventEmitter } from '../../core/EventEmitter';
 import { EVENT_TYPES } from '../../constants/eventTypes';
-import { useNavigare } from '../../hooks/useNavigate';
 
 export class RouterLink extends Component {
-    constructor() {
+    constructor() { 
         super();
+        
         this.template = template();
         this.state = {
             href: this.getAttribute("href"),
@@ -18,7 +18,6 @@ export class RouterLink extends Component {
     onClick = (evt) => {
         evt.preventDefault();
         eventEmitter.emit(EVENT_TYPES.changeRoute, { target: this.state.href })
-        // useNavigare(this.state.href)
     }
 
     componentDidMount() {

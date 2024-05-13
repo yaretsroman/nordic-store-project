@@ -7,6 +7,7 @@ import './pages/home/home.component';
 import './pages/cart/cart.component';
 import './pages/sign-in/sign-in.component';
 import './pages/sign-up/sign-up.component';
+import './pages/user-account/user-account.component';
 import './pages/not-found/not-found.component';
 import { ROUTES } from "./constants/routes";
 

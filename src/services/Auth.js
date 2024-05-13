@@ -1,5 +1,9 @@
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase'
-import { firebaseService } from './Firebase'
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    signOut } from 'firebase/auth'
+import { firebaseService } from "./Firebase";
 
 export class AuthService {
     constructor() {
@@ -14,7 +18,9 @@ export class AuthService {
         return createUserWithEmailAndPassword(this._auth, email, password);
     }
 
-    logOut(email, password) {
+    logOut() {
         return signOut (this._auth);
     }
 }
+
+export const authService = new AuthService();

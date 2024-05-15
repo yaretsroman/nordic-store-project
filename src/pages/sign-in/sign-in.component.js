@@ -5,6 +5,9 @@ import { ROUTES } from "../../constants/routes";
 import "../../components/input/input.component";
 import "../../components/button/button.component";
 import "../../components/loader/loader.component";
+import { authService } from "../../services/Auth";
+import { extractFormData } from "../../utils/extractFormData";
+import { useNavigate } from "../../hooks/useNavigate";
 
 
 export class SignIn extends Component {
@@ -21,6 +24,46 @@ export class SignIn extends Component {
     this.template = template({
       routes: ROUTES
     });
+  }
+
+  toggleIsLoading = () => {
+    this.setState({
+      ...this.state,
+      isLoading: !this.state.isLoading,
+    });
+  };
+
+  signInUser = (evt) => {
+    evt.preventDefault();
+    const formData = extractFormData(evt.target);
+    this.toggleIsLoading();
+    authService
+      .signIn(formData.email, formData.password)
+      .then(() => {
+        useNavigate(ROUTES.account);
+        // authService.updateUserProfile(rest).then(() => {
+        //   setUser({ ...authService.getCurrentUser() });
+        //   useToastNotification({
+        //     message: "Success!!!",
+        //     type: TOAST_TYPE.success,
+        //   });
+          
+        // });
+      })
+      // .catch((error) => {
+      //   useToastNotification({ message: error.message });
+      // })
+      // .finally(() => {
+      //   this.toggleIsLoading();
+      // });
+  };
+
+  componentDidMount() {
+    this.addEventListener("submit", this.signInUser);
+  }
+
+  componentWillUnmount() {
+    this.removeEventListener("submit", this.signInUser);
   }
 
 }

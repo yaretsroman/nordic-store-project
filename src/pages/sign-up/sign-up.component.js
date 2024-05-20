@@ -4,7 +4,9 @@ import { ROUTES } from "../../constants/routes";
 import { extractFormData } from "../../utils/extractFormData";
 import { authService } from "../../services/Auth";
 import { useNavigate } from "../../hooks/useNavigate";
-// import { useUserStore } from "../../hooks/useUserStore";
+import { useUserStore } from "../../hooks/useUserStore";
+import { TOAST_TYPE } from "../../constants/toast";
+import { useToastNotification } from "../../hooks/useToastNotification";
 
 export class SignUp extends Component {
   constructor() {
@@ -27,23 +29,22 @@ export class SignUp extends Component {
     evt.preventDefault();
     const { email, password, ...rest } = extractFormData(evt.target);
     this.toggleIsLoading();
-    // const { setUser } = useUserStore();
+    const { setUser } = useUserStore();
     authService
       .signUp(email, password)
       .then(() => {
-        useNavigate(ROUTES.account);
-        // authService.updateUserProfile(rest).then(() => {
-        //   setUser({ ...authService.getCurrentUser() });
-        //   useToastNotification({
-        //     message: "Success!!!",
-        //     type: TOAST_TYPE.success,
-        //   });
-          
-        // });
+        authService.updateUserProfile(rest).then(() => {
+          setUser({ ...authService.getCurrentUser() });
+          useToastNotification({
+            message: "Success!!!",
+            type: TOAST_TYPE.success,
+          });
+          useNavigate(ROUTES.account);
+        });
       })
-      // .catch((error) => {
-      //   useToastNotification({ message: error.message });
-      // })
+      .catch((error) => {
+        useToastNotification({ message: error.message });
+      })
       .finally(() => {
         this.toggleIsLoading();
       });

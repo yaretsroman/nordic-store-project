@@ -2,8 +2,9 @@ import { Component } from "./core/Component";
 import template from "./app.template.hbs";
 import { ROUTES } from "./constants/routes";
 
-// import { authService } from "./services/Auth";
-// import { useUserStore } from "./hooks/useUserStore";
+import { authService } from "./services/Auth";
+import { useToastNotification } from "./hooks/useToastNotification";
+import { useUserStore } from "./hooks/useUserStore";
 
 import './core/Router';
 
@@ -14,10 +15,10 @@ import './pages/sign-up/sign-up.component';
 import './pages/user-account/user-account.component';
 import './pages/not-found/not-found.component';
 
+import "./components/toast/toast.components";
 import "./components/input/input.component";
 import "./components/button/button.component";
 import "./components/loader/loader.component";
-import { authService } from "./services/Auth";
 
 export class App extends Component {
     constructor() {
@@ -39,13 +40,18 @@ export class App extends Component {
 
     initializeApp() {
         this.toggleIsLoading();
-        authService.authorizeUser()
-        .then((user) => {
-            console.log(user);
-        })
-        .finally(() => {
-            this.toggleIsLoading()
-        })
+        const { setUser } = useUserStore();
+        authService
+        .authorizeUser()
+      .then((user) => {
+        console.log(user);
+      })
+      .catch((error) => {
+        useToastNotification({ message: error.message });
+      })
+      .finally(() => {
+        this.toggleIsLoading();
+      });
     }
 
     componentDidMount() {

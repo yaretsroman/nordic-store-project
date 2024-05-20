@@ -3,12 +3,22 @@ import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     signOut, 
-    onAuthStateChanged} from 'firebase/auth'
+    onAuthStateChanged,
+    updateProfile,
+} from 'firebase/auth'
 import { firebaseService } from "./Firebase";
 
 export class AuthService {
     constructor() {
         this._auth = getAuth(firebaseService.app)
+    }
+
+    getCurrentUser() {
+        return this._auth.currentUser;
+    }
+    
+    updateUserProfile(data) {
+        return updateProfile(this._auth.currentUser, data);
     }
 
     authorizeUser() {

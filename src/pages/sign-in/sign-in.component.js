@@ -1,10 +1,6 @@
 import { Component } from "../../core/Component";
 import template from "./sign-in.template.hbs";
 import { ROUTES } from "../../constants/routes";
-
-import "../../components/input/input.component";
-import "../../components/button/button.component";
-import "../../components/loader/loader.component";
 import { authService } from "../../services/Auth";
 import { extractFormData } from "../../utils/extractFormData";
 import { useNavigate } from "../../hooks/useNavigate";
@@ -53,9 +49,6 @@ export class SignIn extends Component {
       // .catch((error) => {
       //   useToastNotification({ message: error.message });
       // })
-      // .finally(() => {
-      //   this.toggleIsLoading();
-      // });
   };
 
   componentDidMount() {

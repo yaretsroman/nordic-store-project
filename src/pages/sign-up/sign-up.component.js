@@ -4,16 +4,13 @@ import { ROUTES } from "../../constants/routes";
 import { extractFormData } from "../../utils/extractFormData";
 import { authService } from "../../services/Auth";
 import { useNavigate } from "../../hooks/useNavigate";
-import { useUserStore } from "../../hooks/useUserStore";
+// import { useUserStore } from "../../hooks/useUserStore";
 
 export class SignUp extends Component {
   constructor() {
     super();
 
-    this.template = template({
-      routes: ROUTES
-    });
-
+    this.template = template({ routes: ROUTES });
     this.state = {
       isLoading: false,
     };
@@ -30,10 +27,10 @@ export class SignUp extends Component {
     evt.preventDefault();
     const { email, password, ...rest } = extractFormData(evt.target);
     this.toggleIsLoading();
-    const { setUser } = useUserStore();
+    // const { setUser } = useUserStore();
     authService
       .signUp(email, password)
-      .then((data) => {
+      .then(() => {
         useNavigate(ROUTES.account);
         // authService.updateUserProfile(rest).then(() => {
         //   setUser({ ...authService.getCurrentUser() });
@@ -47,9 +44,9 @@ export class SignUp extends Component {
       // .catch((error) => {
       //   useToastNotification({ message: error.message });
       // })
-      // .finally(() => {
-      //   this.toggleIsLoading();
-      // });
+      .finally(() => {
+        this.toggleIsLoading();
+      });
   };
 
   componentDidMount() {

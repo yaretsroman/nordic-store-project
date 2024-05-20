@@ -10,7 +10,8 @@ export class userAccount extends Component {
         this.template = template({
             routes: ROUTES,
         });
-    }
+
+    };
 }
 
 customElements.define('user-account', userAccount);

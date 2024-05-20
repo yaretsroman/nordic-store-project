@@ -2,12 +2,19 @@ import {
     getAuth,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
-    signOut } from 'firebase/auth'
+    signOut, 
+    onAuthStateChanged} from 'firebase/auth'
 import { firebaseService } from "./Firebase";
 
 export class AuthService {
     constructor() {
         this._auth = getAuth(firebaseService.app)
+    }
+
+    authorizeUser() {
+        return new Promise((resolve, reject) => {
+            onAuthStateChanged(this._auth, resolve, reject)
+        })
     }
 
     signIn(email, password) {

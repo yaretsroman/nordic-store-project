@@ -13,7 +13,7 @@ export class Store {
   setState(state) {
     this._state = Object.assign(this._state, state);
     eventEmitter.emit(EVENT_TYPES.store, { state: this._state });
-  }
+  } 
 
   subscribe(callback) {
     eventEmitter.on(EVENT_TYPES.store, callback);

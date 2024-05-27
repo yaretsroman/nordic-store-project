@@ -12,8 +12,7 @@ export class HomePage extends Component {
         this.state = {
             links: [
                 {
-                    
-                    
+                    icon: this.icon,
                     href: ROUTES.singIn,
                 },
                 {
@@ -25,20 +24,21 @@ export class HomePage extends Component {
     }
 
     subscribe = ({ detail }) => {
-        if(detail.state.user) {
-            this.setState({
-                links: [
-                    {
-                        label: 'Account',
-                        href: ROUTES.account,
-                    },
-                    {
-                        label: 'Cart Page',
-                        href: ROUTES.cart,
-                    }
-                ]
-            })
-        }
+        console.log(detail.state);
+        // if(detail.state.user) {
+        //     this.setState({
+        //         links: [
+        //             {
+                        
+        //                 href: ROUTES.account,
+        //             },
+        //             {
+                        
+        //                 href: ROUTES.cart,
+        //             }
+        //         ]
+        //     })
+        // }
     }
 
     componentDidMount() {

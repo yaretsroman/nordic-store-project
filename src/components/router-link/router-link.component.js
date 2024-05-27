@@ -12,6 +12,7 @@ export class RouterLink extends Component {
             href: this.getAttribute("href"),
             class: this.getAttribute("class"),
             label: this.getAttribute("label"),
+            icon: this.querySelectorAll("svg"),
         }
     }
 

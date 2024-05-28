@@ -16,7 +16,7 @@ export class HomePage extends Component {
                     href: ROUTES.singIn,
                 },
                 {
-                    
+                    icon: this.icon,
                     href: ROUTES.cart,
                 }
             ]

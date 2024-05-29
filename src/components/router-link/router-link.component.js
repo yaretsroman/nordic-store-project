@@ -3,6 +3,7 @@ import template from './router-link.template.hbs';
 import { eventEmitter } from '../../core/EventEmitter';
 import { EVENT_TYPES } from '../../constants/eventTypes';
 
+
 export class RouterLink extends Component {
     constructor() { 
         super();

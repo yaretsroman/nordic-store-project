@@ -3,6 +3,7 @@ import template from './home.template.hbs';
 import { ROUTES } from '../../constants/routes';
 
 import "../../components/router-link/router-link.component";
+
 import { store } from "../../store/Store";
 
 export class HomePage extends Component {
@@ -12,11 +13,11 @@ export class HomePage extends Component {
         this.state = {
             links: [
                 {
-                    icon: this.icon,
+                    
                     href: ROUTES.singIn,
                 },
                 {
-                    icon: this.icon,
+                    
                     href: ROUTES.cart,
                 }
             ]

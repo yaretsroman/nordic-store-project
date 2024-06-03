@@ -13,11 +13,11 @@ export class HomePage extends Component {
         this.state = {
             links: [
                 {
-                    
+                    label: "Sign In",
                     href: ROUTES.singIn,
                 },
                 {
-                    
+                    label: "Cart",
                     href: ROUTES.cart,
                 }
             ]

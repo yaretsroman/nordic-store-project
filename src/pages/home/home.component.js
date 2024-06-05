@@ -9,37 +9,13 @@ import { store } from "../../store/Store";
 export class HomePage extends Component {
     constructor() {
         super();
-        this.template = template();
-        this.state = {
-            links: [
-                {
-                    label: "Sign-In",
-                    href: ROUTES.singIn,
-                },
-                {
-                    label: "Cart",
-                    href: ROUTES.cart,
-                }
-            ]
-        }
+        this.template = template({
+            routes: ROUTES,
+        });
     }
 
     subscribe = ({ detail }) => {
         console.log(detail.state);
-        // if(detail.state.user) {
-        //     this.setState({
-        //         links: [
-        //             {
-                        
-        //                 href: ROUTES.account,
-        //             },
-        //             {
-                        
-        //                 href: ROUTES.cart,
-        //             }
-        //         ]
-        //     })
-        // }
     }
 
     componentDidMount() {

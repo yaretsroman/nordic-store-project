@@ -4,26 +4,39 @@ import { ROUTES } from '../../constants/routes';
 
 import "../../components/router-link/router-link.component";
 
-import { store } from "../../store/Store";
+// import { store } from "../../store/Store";
+import { useUserStore } from "../../hooks/useUserStore";
 
 export class HomePage extends Component {
     constructor() {
         super();
-        this.template = template({
-            routes: ROUTES,
-        });
+        this.template = template();
+        this.state = {
+            links: [
+              {
+                href: ROUTES.singIn,
+                
+              },
+            ],
+          };
     }
 
-    subscribe = ({ detail }) => {
-        console.log(detail.state);
-    }
+    setLinks = () => {
+        const { getUser } = useUserStore();
+        if (getUser()) {
+          this.setState({
+            links: [
+              {
+                href: ROUTES.account,
+                
+              },
+            ],
+          });
+        }
+    };
 
     componentDidMount() {
-        store.subscribe(this.subscribe)
-    }
-
-    componentWillUnmount() {
-        store.unSubscribe(this.subscribe)
+        this.setLinks();
     }
 }
 

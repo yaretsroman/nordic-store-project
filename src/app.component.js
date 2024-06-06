@@ -5,7 +5,7 @@ import { ROUTES } from "./constants/routes";
 
 import { authService } from "./services/Auth";
 import { useToastNotification } from "./hooks/useToastNotification";
-// import { useUserStore } from "./hooks/useUserStore";
+import { useUserStore } from "./hooks/useUserStore";
 
 import './core/Router';
 
@@ -20,7 +20,6 @@ import "./components/toast/toast.components";
 import "./components/input/input.component";
 import "./components/button/button.component";
 import "./components/loader/loader.component";
-import { store } from "./store/Store";
 
 export class App extends Component {
     constructor() {
@@ -42,11 +41,13 @@ export class App extends Component {
 
     initializeApp() {
         this.toggleIsLoading();
-        // const { setUser } = useUserStore();
+        const { setUser } = useUserStore();
         authService
         .authorizeUser()
       .then((user) => {
-        store.setState({ user })
+        if (user.uid) {
+          setUser({ ...user });
+        }
       })
       .catch((error) => {
         useToastNotification({ message: error.message });

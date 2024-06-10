@@ -27,20 +27,18 @@ export class SignUp extends Component {
 
   registerUser = (evt) => {
     evt.preventDefault();
-    const { email, password, ...rest } = extractFormData(evt.target);
+    const formData = extractFormData(evt.target);
     this.toggleIsLoading();
     const { setUser } = useUserStore();
     authService
-      .signUp(email, password)
-      .then(() => {
-        authService.updateUserProfile(rest).then(() => {
-          setUser({ ...authService.getCurrentUser() });
-          useToastNotification({
-            message: "Success!!!",
-            type: TOAST_TYPE.success,
-          });
-          useNavigate(ROUTES.account);
+      .signUp(formData.email, formData.password)
+      .then((user) => {
+        setUser({...user})
+        useToastNotification({
+          message: "Success!!!",
+          type: TOAST_TYPE.success,
         });
+        useNavigate(ROUTES.home);
       })
       .catch((error) => {
         useToastNotification({ message: error.message });

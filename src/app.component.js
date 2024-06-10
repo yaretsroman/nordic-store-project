@@ -22,44 +22,39 @@ import "./components/button/button.component";
 import "./components/loader/loader.component";
 
 export class App extends Component {
-    constructor() {
-        super();
-        this.template = template({
-            routes: ROUTES,
-        });
-        this.state = {
-            isLoading: false,
-        };
-    }
-
-    toggleIsLoading = () => {
-        this.setState({
-          ...this.state,
-          isLoading: !this.state.isLoading,
-        });
-    };
-
-    initializeApp() {
-        this.toggleIsLoading();
-        const { setUser } = useUserStore();
-        authService
-        .authorizeUser()
-      .then((user) => {
-        if (user.uid) {
-          setUser({ ...user });
-        }
-      })
-      .catch((error) => {
-        useToastNotification({ message: error.message });
-      })
-      .finally(() => {
-        this.toggleIsLoading();
+  constructor() {
+      super();
+      this.template = template({
+          routes: ROUTES,
       });
-    }
+      this.state = {
+          isLoading: false,
+      };
+  }
+  toggleIsLoading = () => {
+      this.setState({
+        ...this.state,
+        isLoading: !this.state.isLoading,
+      });
+  };
+  initializeApp() {
+    this.toggleIsLoading();
+    const { setUser } = useUserStore();
+    authService.authorizeUser()
+    .then((user) => {
+      setUser({user: user.uui ? user : null})
+    })
+    .catch((error) => {
+      useToastNotification({ message: error.message })
+    })
+    .finally(() => {
+      this.toggleIsLoading()
+    })
+  }
 
-    componentDidMount() {
-        this.initializeApp()
-    }
+  componentDidMount() {
+    this.initializeApp()
+  }
 }
 
 customElements.define("my-app", App);

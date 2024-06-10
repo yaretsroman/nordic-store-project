@@ -39,13 +39,13 @@ export class SignIn extends Component {
     this.toggleIsLoading();
     authService
       .signIn(formData.email, formData.password)
-      .then((data) => {
-        setUser({ ...data.user });
+      .then((user) => {
+        setUser({ ...user });
         useToastNotification({
           message: "Success!!!",
           type: TOAST_TYPE.success,
         });
-        useNavigate(ROUTES.account);
+        useNavigate(ROUTES.home);
       })
       .catch((error) => {
         useToastNotification({ message: error.message });

@@ -14,8 +14,8 @@ export class HomePage extends Component {
         this.state = {
             links: [
               {
+                label: "Sign In",
                 href: ROUTES.singIn,
-                
               },
             ],
           };
@@ -27,8 +27,8 @@ export class HomePage extends Component {
           this.setState({
             links: [
               {
-                href: ROUTES.account,
-                
+                label: "Cart",
+                href: ROUTES.cart,
               },
             ],
           });

@@ -8,36 +8,36 @@ import "../../components/router-link/router-link.component";
 import { useUserStore } from "../../hooks/useUserStore";
 
 export class HomePage extends Component {
-    constructor() {
-        super();
-        this.template = template();
-        this.state = {
-            links: [
-              {
-                label: "Sign In",
-                href: ROUTES.singIn,
-              },
-            ],
-          };
-    }
+  constructor() {
+      super();
+      this.template = template();
+      this.state = {
+          links: [
+            {
+              label: "Sign In",
+              href: ROUTES.singIn,
+            },
+          ],
+        };
+  }
 
-    setLinks = () => {
-        const { getUser } = useUserStore();
-        if (getUser()) {
-          this.setState({
-            links: [
-              {
-                label: "Cart",
-                href: ROUTES.cart,
-              },
-            ],
-          });
-        }
-    };
+  setLinks = () => {
+      const { getUser } = useUserStore();
+      if (getUser()) {
+        this.setState({
+          links: [
+            {
+              label: "My Cart",
+              href: ROUTES.cart,
+            },
+          ],
+        });
+      }
+  };
 
-    componentDidMount() {
-        this.setLinks();
-    }
+  componentDidMount() {
+    this.setLinks();
+  }
 }
 
 customElements.define('home-page', HomePage)

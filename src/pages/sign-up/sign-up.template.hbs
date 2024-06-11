@@ -1,40 +1,56 @@
-<div class="grid grid-cols-12 min-h-screen">
-  <div class="col-span-3 relative">
-    <ui-loader loading="{{isLoading}}" class-name="z-1 bg-white/70"></ui-loader>
-    <div class="px-5 mt-10">
-      <div class="flex items-center gap-2">
-        <i class="icon-arrow-left text-indigo-500"></i>
-        <router-link
-          label="Back to LandingPage"
-          class="text-indigo-500 text-sm"
-          href="${props.routes.home}"
-        ></router-link>
-      </div>
-      <div class="mt-16">
-        <h1 class="text-2xl">Sign up your account</h1>
-        <p class="text-slate-400 mt-3 text-sm">Already have an account?
-          <router-link
-            label="Sign In"
-            class="text-indigo-500"
-            href="${props.routes.singIn}"
-          ></router-link></p>
-        <form class="flex flex-col gap-3 sign-in-form mt-12">
-          <ui-input label="Email address" name="email" type="email"></ui-input>
-          {{!-- <ui-input
-            label="Display name"
-            name="displayName"
-            type="text"
-          ></ui-input> --}}
-          {{!-- <ui-input
-            label="phone Number"
-            name="phoneNumber"
-            type="tel"
-          ></ui-input> --}}
-          <ui-input label="Password" type="password" name="password"></ui-input>
-          <ui-button caption="Sign Up" class-name="block w-full"></ui-button>
-        </form>
-      </div>
+<div class="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <ui-loader loading="{{isLoading}}" class-name="z-1 bg-white/70"></ui-loader>
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Sign Up
+        </h2>
+        
     </div>
-  </div>
-  <div class="col-span-9 bg-workspace bg-cover"></div>
+
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <form class="space-y-6" action="#" method="POST">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">
+                        Email address
+                    </label>
+                    <div class="mt-1">
+                        <input id="email" name="email" type="email" autocomplete="email" required
+                            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                            placeholder="Enter your email address">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">
+                        Password
+                    </label>
+                    <div class="mt-1">
+                        <input id="password" name="password" type="password" autocomplete="current-password" required
+                            class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                            placeholder="Enter your password">
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    
+
+                    <div class="text-sm">
+                        <a href="${props.routes.home}" class="font-medium text-gray-500 hover:text-gray-400 hover:underline">
+                            Back to the Store
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit"
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+
+                        Sign Up
+                    </button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
 </div>

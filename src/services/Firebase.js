@@ -3,12 +3,12 @@ import { initializeApp } from "firebase/app";
 export class Firebase {
     constructor() {
         this._app = initializeApp({
-            apiKey: import.meta.env.VITE_API_KEY,
-            authDomain: "bakery-project-ead25.firebaseapp.com",
-            projectId: "bakery-project-ead25",
-            storageBucket: "bakery-project-ead25.appspot.com",
-            messagingSenderId: "348506583839",
-            appId: "1:348506583839:web:2c0b17771a9ecfe1e0b62a"
+            apiKey: "AIzaSyD-n7LiSoL_qAMbWj8DAV3ARKQUxws-8Qg",
+            authDomain: "nordic-store-project.firebaseapp.com",
+            projectId: "nordic-store-project",
+            storageBucket: "nordic-store-project.appspot.com",
+            messagingSenderId: "648791182424",
+            appId: "1:648791182424:web:407a694070bdd617334e2d"
         })
     }
 

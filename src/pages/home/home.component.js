@@ -30,6 +30,10 @@ export class HomePage extends Component {
               label: "My Cart",
               href: ROUTES.cart,
             },
+            {
+              label: "Log Out",
+              href: ROUTES.singIn,
+            }
           ],
         });
       }

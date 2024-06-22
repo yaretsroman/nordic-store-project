@@ -1,6 +1,8 @@
 import { Component } from '../../core/Component';
 import template from './home.template.hbs';
 import { ROUTES } from '../../constants/routes';
+import { getProductsApi } from "../../api/products";
+import { mapResponseApiData } from "../../utils/api";
 
 import "../../components/router-link/router-link.component";
 
@@ -9,16 +11,16 @@ import { useUserStore } from "../../hooks/useUserStore";
 
 export class HomePage extends Component {
   constructor() {
-      super();
-      this.template = template();
-      this.state = {
-          links: [
-            {
-              label: "Sign In",
-              href: ROUTES.singIn,
-            },
-          ],
-        };
+    super();
+    this.template = template();
+    this.state = {
+       links: [
+        {
+          label: "Sign In",
+          href: ROUTES.singIn,
+        },
+       ],
+    };
   }
 
   setLinks = () => {

@@ -1,8 +1,6 @@
 import { Component } from '../../core/Component';
 import template from './home.template.hbs';
 import { ROUTES } from '../../constants/routes';
-import { getProductsApi } from "../../api/products";
-import { mapResponseApiData } from "../../utils/api";
 
 import "../../components/router-link/router-link.component";
 

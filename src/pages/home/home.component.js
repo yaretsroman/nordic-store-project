@@ -12,7 +12,6 @@ import { mapResponseApiData } from '../../utils/api';
 import { TOAST_TYPE } from '../../constants/toast';
 import { useNavigate } from '../../hooks/useNavigate';
 import { authService } from "../../services/Auth";
-import { Button } from '../../components/button/button.component';
 
 export class HomePage extends Component {
   constructor() {
@@ -73,7 +72,7 @@ export class HomePage extends Component {
     .finally(() => {
       this.toggleIsLoading();
     });
-  }
+  } 
 
   onClick = ({ target }) => {
     if (target.closest(".logout-btn")) {
@@ -93,6 +92,7 @@ export class HomePage extends Component {
       })
       
   };
+
 
   setUser() {
     const { getUser } = useUserStore();

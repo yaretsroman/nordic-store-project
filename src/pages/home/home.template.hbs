@@ -55,6 +55,8 @@
             text-align: center;
             z-index: 10;
         }
+
+      
         
         #carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
         #carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
@@ -87,12 +89,12 @@
                label="{{ this.label }}">
                </router-link>
             {{/each}}
-            <button
+            {{!-- <button
             class="logout-btn border flex items-center rounded-md m-3 p-1 gap-1 bg-stone-300 text-slate-900 hover:bg-stone-200"
             >
             <i class="icon-log-out"></i>
             logOut
-           </button>
+           </button> --}}
         </div>   
     </nav>
     <div class="carousel relative container mx-auto" style="max-width:1600px;">

@@ -64,8 +64,8 @@ export class HomePage extends Component {
       setUser(null);
       useToastNotification({ type: TOAST_TYPE.success, message: 'Success!' });
       useNavigate(ROUTES.home);
-      
     })
+
     .catch((message) => {
       useToastNotification({ message });
     })

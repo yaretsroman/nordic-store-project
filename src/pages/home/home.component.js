@@ -50,34 +50,13 @@ export class HomePage extends Component {
               label: "My Cart",
               href: ROUTES.cart,
             },
+            {
+              label: "LogOut",
+              href: ROUTES.logOut,
+            },
           ],
         });
       }
-  };
-
-  logout = () => {
-    this.toggleIsLoading()
-    const { setUser } = useUserStore();
-    authService
-    .logOut()
-    .then(() => {
-      setUser(null);
-      useToastNotification({ type: TOAST_TYPE.success, message: 'Success!' });
-      useNavigate(ROUTES.home);
-    })
-
-    .catch((message) => {
-      useToastNotification({ message });
-    })
-    .finally(() => {
-      this.toggleIsLoading();
-    });
-  } 
-
-  onClick = ({ target }) => {
-    if (target.closest(".logout-btn")) {
-      this.logout();
-    }
   };
 
   getProducts = () => {
@@ -105,11 +84,10 @@ export class HomePage extends Component {
   componentDidMount() {
     this.setLinks();
     this.getProducts();
-    this.addEventListener("click", this.onClick);
   }
 
   componentWillUnmount() {
-    this.removeEventListener("click", this.onClick);
+    
   }
 }
 

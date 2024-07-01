@@ -29,6 +29,7 @@ export class HomePage extends Component {
       },
       ],
       products: [],
+      orderCart: [],
       isLoading: false,
       user: null,
     };
@@ -60,18 +61,30 @@ export class HomePage extends Component {
   };
 
   getProducts = () => {
-    
     apiService
-      .get("/products")
-      .then(({ data }) => {
-        this.setState({
-          ...this.state,
-          products: mapResponseApiData(data),
-        });
-      })
-      
+    .get("/products")
+    .then(({ data }) => {
+      this.setState({
+        ...this.state,
+        products: mapResponseApiData(data),
+      });
+    })
   };
 
+  // addToCard = (e) => {
+  //   if (e.target.closest(".add-to-cart")) {
+  //     let price = e.target.previousSibling.previousSibling.dataset.price;
+  //     let title = e.target.parentElement.parentElement.dataset.title;
+  //     let img = e.target.parentElement.parentElement.dataset.img;
+  //     const cartItems = { price, title, img };
+  //     apiService.post("/order", cartItems).then(() => {
+  //       this.setState({
+  //         ...this.state,
+  //         orderCart: this.state.orderCart.concat(cartItems),
+  //       });
+  //     })
+  //   }
+  // };
 
   setUser() {
     const { getUser } = useUserStore();
@@ -84,10 +97,11 @@ export class HomePage extends Component {
   componentDidMount() {
     this.setLinks();
     this.getProducts();
+    this.addEventListener("click", this.addToCard);
   }
 
   componentWillUnmount() {
-    
+    this.removeEventListener("click", this.addToCard);
   }
 }
 

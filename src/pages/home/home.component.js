@@ -72,12 +72,13 @@ export class HomePage extends Component {
   };
 
   // addToCard = (e) => {
-  //   if (e.target.closest(".add-to-cart")) {
+  //   if (e.target.closest('.add-to-cart')) {
   //     let price = e.target.previousSibling.previousSibling.dataset.price;
-  //     let title = e.target.parentElement.parentElement.dataset.title;
+  //     let title = e.target.parentElement.parentElement.dataset.title;``
   //     let img = e.target.parentElement.parentElement.dataset.img;
+    
   //     const cartItems = { price, title, img };
-  //     apiService.post("/order", cartItems).then(() => {
+  //     apiService.post('/order', cartItems).then(() => {
   //       this.setState({
   //         ...this.state,
   //         orderCart: this.state.orderCart.concat(cartItems),
@@ -97,11 +98,12 @@ export class HomePage extends Component {
   componentDidMount() {
     this.setLinks();
     this.getProducts();
-    this.addEventListener("click", this.addToCard);
+    // this.addEventListener("click", this.addToCard);
+    
   }
 
   componentWillUnmount() {
-    this.removeEventListener("click", this.addToCard);
+    // this.removeEventListener("click", this.addToCard);
   }
 }
 

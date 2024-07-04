@@ -3,6 +3,8 @@ import template from './home.template.hbs';
 import { ROUTES } from '../../constants/routes';
 import { apiService } from '../../services/Api';
 import { useToastNotification } from "../../hooks/useToastNotification";
+import { useCartStorage } from "../../hooks/useCartStorage";
+import { getProductApi } from "../../api/products";
 
 import "../../components/router-link/router-link.component";
 
@@ -71,19 +73,40 @@ export class HomePage extends Component {
     })
   };
 
-  // addToCard = (e) => {
-  //   if (e.target.closest('.add-to-cart')) {
-  //     let price = e.target.previousSibling.previousSibling.dataset.price;
-  //     let title = e.target.parentElement.parentElement.dataset.title;``
-  //     let img = e.target.parentElement.parentElement.dataset.img;
+  addToCard = (e) => {
+    if (e.target.closest('.add-to-cart')) {
+      let id = e.target.parentElement.dataset.id;
+      let price = e.target.parentElement.parentElement.dataset.price;
+      let name = e.target.parentElement.parentElement.parentElement.dataset.name;
+      let img = e.target.parentElement.parentElement.parentElement.dataset.img;
     
-  //     const cartItems = { price, title, img };
-  //     apiService.post('/order', cartItems).then(() => {
-  //       this.setState({
-  //         ...this.state,
-  //         orderCart: this.state.orderCart.concat(cartItems),
-  //       });
-  //     })
+      const cartItems = { id, price, name, img };
+      apiService.post('/order', cartItems).then(() => {
+        console.log(cartItems);
+        this.setState({
+          ...this.state,
+          orderCart: this.state.orderCart.concat(cartItems),
+        });
+      })
+    }
+  };
+
+  // onClick = ({ target }) => {
+  //   const productCartBtn = target.closest(".add-to-cart");
+
+  //   if (productCartBtn) {
+	// 		const { product } = this.state;
+  //     const { setItem } = useCartStorage();
+  //     setItem(product.id, {
+  //       id: product.id,
+  //       name: product.name,
+  //       price: product.price,
+	// 			image: product.image,
+  //     });
+	// 		useToastNotification({
+	// 			type: TOAST_TYPE.success,
+	// 			message: 'Product In Cart!'
+	// 		});
   //   }
   // };
 
@@ -98,12 +121,12 @@ export class HomePage extends Component {
   componentDidMount() {
     this.setLinks();
     this.getProducts();
-    // this.addEventListener("click", this.addToCard);
+    this.addEventListener("click", this.addToCard);
     
   }
 
   componentWillUnmount() {
-    // this.removeEventListener("click", this.addToCard);
+    this.removeEventListener("click", this.addToCard);
   }
 }
 

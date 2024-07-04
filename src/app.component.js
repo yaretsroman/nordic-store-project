@@ -6,6 +6,8 @@ import { ROUTES } from "./constants/routes";
 import { authService } from "./services/Auth";
 import { useToastNotification } from "./hooks/useToastNotification";
 import { useUserStore } from "./hooks/useUserStore";
+import { apiService } from "./services/Api";
+import { API_URLS } from "./constants/api-urls";
 
 import './core/Router';
 
@@ -37,22 +39,22 @@ export class App extends Component {
         isLoading: !this.state.isLoading,
       });
   };
-  initializeApp() {
+  
+  initializeApp = async () => {
     this.toggleIsLoading();
     const { setUser } = useUserStore();
-    authService.authorizeUser()
-    .then((user) => {
+    try {
+      const user = await authService.authorizeUser();
       if (user.uid) {
-        setUser({ ...user })
+        const { data } = await apiService.get(`${API_URLS.users}/${user.uid}`);
+        setUser({ ...user, userProps: data });
       }
-    })
-    .catch((error) => {
-      useToastNotification({ message: error.message })
-    })
-    .finally(() => {
-      this.toggleIsLoading()
-    })
-  }
+    } catch ({ message }) {
+      useToastNotification({ message });
+    } finally {
+      this.toggleIsLoading();
+    }
+  };
 
   componentDidMount() {
     this.initializeApp()

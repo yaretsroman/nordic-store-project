@@ -6,7 +6,7 @@ export class Button extends Component {
     super();
     this.template = template();
     this.state = {
-      caption: this.getAttribute("caption"),
+      caption: this.getAttribute("caption") ?? "",
       className: this.getAttribute("class-name"),
     };
   }

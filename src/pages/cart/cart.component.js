@@ -13,7 +13,7 @@ export class CartPage extends Component {
     });
     
     this.state = {
-      products: [],
+      cart: [],
       isLoading: false,
       user: null,
     };
@@ -44,7 +44,7 @@ export class CartPage extends Component {
         apiService.get("/order").then(({ data }) => {
           this.setState({
             ...this.state,
-            
+            cart: data,
             user: getUser()
           });
         })
@@ -52,15 +52,26 @@ export class CartPage extends Component {
     }
   };
 
-  setUser() {
-    const { getUser } = useUserStore();
-    this.setState({
-      ...this.state,
-      user: getUser(),
-    });
+  init = async() => {
+    this.toggleIsLoading()
+    try {
+      const { getUser } = useUserStore();
+      const { data } = await apiService.get("/order");
+      const result = mapResponseApiData(data);
+      this.setState({
+        ...this.state,
+        user: getUser(),
+        cart: result,
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.toggleIsLoading()
+    }
   }
 
   componentDidMount() {
+    this.init();
     this.getProducts();
     this.addEventListener("click", this.onClick);
   }

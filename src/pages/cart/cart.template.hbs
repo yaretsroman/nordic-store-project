@@ -6,10 +6,11 @@
         <h2 class="font-semibold text-2xl">3 Items</h2>
       </div>
       
-        {{#each products}}
+        {{#if cart}}
+            {{#each products}}
          <div class="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50">
            <div data-img="{{this.img}}" class="md:w-4/12 2xl:w-1/4 w-full">
-             <img src="{{this.img}}" alt="Black Leather Purse" class="h-full object-center object-cover md:block hidden" />
+             <img src="{{this.img}}" alt="Black Leather Purse" class="h-full object-center object-cover " />
            </div>
            <div class="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
              <div class="flex items-center justify-between w-full">
@@ -20,17 +21,17 @@
                    <option>03</option>
                  </select>
              </div>
-             <div class="flex items-center justify-between pt-5">
+              <div class="flex items-center justify-between pt-5">
    
-               <div class="flex itemms-center">
-                 <p class="clear text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
-               </div>
-   
-               <p data-price="{{this.price}}" class="text-base font-black leading-none text-gray-800">{{this.price}}</p>
-             </div>
+                <button class="clear bg-gray-600 p-2 rounded-lg font-semibold hover:bg-gray-700 py-3 text-sm text-white uppercase"  caption="Remove" class-name="text-white">Remove</button>
+
+                <p data-price="{{this.price}}" class="text-base font-black leading-none text-gray-800">{{this.price}}</p>
+
+              </div>
            </div>
       </div>
       {{/each}}
+        {{/if}}
 
       <a href="${props.routes.home}" class="flex font-semibold text-gray-600 text-sm mt-10">
         <svg class="fill-current mr-2 text-gray-600 w-4" viewBox="0 0 448 512">

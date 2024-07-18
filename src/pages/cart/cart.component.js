@@ -13,7 +13,7 @@ export class CartPage extends Component {
     });
     
     this.state = {
-      cart: [],
+      data: [],
       isLoading: false,
       user: null,
     };
@@ -25,59 +25,89 @@ export class CartPage extends Component {
     });
   };
 
-  getProducts = () => {
-    apiService
-    .get("/order")
-    .then(({ data }) => {
+  // getProducts = () => {
+  //   apiService
+  //   .get("/order")
+  //   .then(({ data }) => {
+  //     this.setState({
+  //       ...this.state,
+  //       data: mapResponseApiData(data),
+  //     });
+  //   })
+  // };
+
+  deleteItem = async ({ target }) => {
+    const cartBtnDelete = target.closest(".clear");
+    if (cartBtnDelete) {
+      let id = target.parentElement.parentElement.dataset.id;
+      await apiService.delete(`/order/${id}`);
+      const { data } = await apiService.get("/order");
+      const result = mapResponseApiData(data ?? {});
       this.setState({
         ...this.state,
-        products: mapResponseApiData(data),
-      });
-    })
-  };
-
-  onClick = ({ target }) => {
-    const { getUser } = useUserStore()
-    if (target.closest(".clear")) {
-      this.toggleIsLoading()
-      apiService.delete("/order").then(() => {
-        apiService.get("/order").then(({ data }) => {
-          this.setState({
-            ...this.state,
-            cart: data,
-            user: getUser()
-          });
-        })
+        data: result,
       });
     }
   };
 
-  init = async() => {
-    this.toggleIsLoading()
+  // onClick = ({ target }) => {
+  //   const { getUser } = useUserStore()
+  //   if (target.closest(".clear")) {
+  //     this.toggleIsLoading()
+  //     apiService.delete("/order").then(() => {
+  //       apiService.get("/order").then(({ data }) => {
+  //         this.setState({
+  //           ...this.state,
+  //           cart: data,
+  //           user: getUser()
+  //         });
+  //       })
+  //     });
+  //   }
+  // };
+
+  async init() {
     try {
       const { getUser } = useUserStore();
-      const { data } = await apiService.get("/order");
+      const { data } = (await apiService.get("/order"));
       const result = mapResponseApiData(data);
       this.setState({
         ...this.state,
         user: getUser(),
-        cart: result,
+        data: result,
       });
     } catch (error) {
       console.log(error);
-    } finally {
-      this.toggleIsLoading()
     }
   }
 
+  // init = async() => {
+  //   this.toggleIsLoading()
+  //   try {
+  //     const { getUser } = useUserStore();
+  //     const { data } = await apiService.get("/order");
+  //     const result = mapResponseApiData(data);
+  //     this.setState({
+  //       ...this.state,
+  //       user: getUser(),
+  //       cart: result,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     this.toggleIsLoading()
+  //   }
+  // }
+
   componentDidMount() {
     this.init();
-    this.getProducts();
-    this.addEventListener("click", this.onClick);
+    // this.getProducts();
+    this.addEventListener("click", this.deleteItem);
   }
 
   componentWillUnmount() {
-    this.removeEventListener("click", this.onClick);
+    this.init();
+    this.removeEventListener("click", this.deleteItem);
   }
 }
 

@@ -2,18 +2,14 @@ import { Component } from '../../core/Component';
 import template from './home.template.hbs';
 import { ROUTES } from '../../constants/routes';
 import { apiService } from '../../services/Api';
-import { useToastNotification } from "../../hooks/useToastNotification";
-import { useCartStorage } from "../../hooks/useCartStorage";
-import { getProductApi } from "../../api/products";
 
 import "../../components/router-link/router-link.component";
 
 // import { store } from "../../store/Store";
 import { useUserStore } from "../../hooks/useUserStore";
+import { useToastNotification } from "../../hooks/useToastNotification";
+import { TOAST_TYPE } from "../../constants/toast";
 import { mapResponseApiData } from '../../utils/api';
-import { TOAST_TYPE } from '../../constants/toast';
-import { useNavigate } from '../../hooks/useNavigate';
-import { authService } from "../../services/Auth";
 
 export class HomePage extends Component {
   constructor() {
@@ -30,6 +26,7 @@ export class HomePage extends Component {
         href: ROUTES.singIn,
       },
       ],
+
       products: [],
       orderCart: [],
       isLoading: false,
@@ -88,6 +85,10 @@ export class HomePage extends Component {
           orderCart: this.state.orderCart.concat(cartItems),
         });
       })
+      useToastNotification({
+        message: "Product in the cart!",
+        type: TOAST_TYPE.success,
+      });
     }
   };
 

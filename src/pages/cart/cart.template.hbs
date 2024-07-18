@@ -1,4 +1,5 @@
 <div class="container mx-auto mt-10">
+  <ui-loader loading="{{isLoading}}" class-name="z-1 bg-white/70"></ui-loader>
   <div class="sm:flex shadow-md my-10">
     <div class="  w-full  sm:w-3/4 bg-white px-10 py-10">
       <div class="flex justify-between border-b pb-8">
@@ -6,33 +7,31 @@
         <h2 class="font-semibold text-2xl">3 Items</h2>
       </div>
       
-        {{#if cart}}
-            {{#each products}}
-         <div class="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50">
-           <div data-img="{{this.img}}" class="md:w-4/12 2xl:w-1/4 w-full">
-             <img src="{{this.img}}" alt="Black Leather Purse" class="h-full object-center object-cover " />
-           </div>
-           <div class="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
-             <div class="flex items-center justify-between w-full">
-               <p data-name="{{this.name}}" class="text-base font-black leading-none text-gray-800">{{this.name}}</p>
-               <select aria-label="Select quantity" class="py-2 px-1 border border-gray-200 mr-6 focus:outline-none">
-                   <option>01</option>
-                   <option>02</option>
-                   <option>03</option>
-                 </select>
-             </div>
-              <div class="flex items-center justify-between pt-5">
-   
-                <button class="clear bg-gray-600 p-2 rounded-lg font-semibold hover:bg-gray-700 py-3 text-sm text-white uppercase"  caption="Remove" class-name="text-white">Remove</button>
+      {{#each data}}
+        <div class="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50" data-id="{{this.id}}">
+          <div data-img="{{this.img}}" class="md:w-4/12 2xl:w-1/4 w-full">
+            <img src="{{this.img}}" alt="Black Leather Purse" class="h-full object-center object-cover " />
+          </div>
 
-                <p data-price="{{this.price}}" class="text-base font-black leading-none text-gray-800">{{this.price}}</p>
+          <div class="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center" data-id="{{this.id}}">
+            <div class="flex items-center justify-between w-full">
+              <p data-name="{{this.name}}" class="text-base font-black leading-none text-gray-800">{{this.name}}</p>
+              <select aria-label="Select quantity" class="py-2 px-1 border border-gray-200 mr-6 focus:outline-none">
+                <option>01</option>
+                <option>02</option>
+                <option>03</option>
+              </select>
+            </div>
+            <div class="flex items-center justify-between pt-5">
 
-              </div>
-           </div>
-      </div>
+              <button class="clear bg-gray-600 p-2 rounded-lg font-semibold hover:bg-gray-700 py-3 text-sm text-white uppercase">Remove</button>
+              <p data-price="{{this.price}}" class="text-base font-black leading-none text-gray-800" data-id="{{this.id}}">{{this.price}}</p>
+              
+            </div>
+          </div>
+        </div>
       {{/each}}
-        {{/if}}
-
+       
       <a href="${props.routes.home}" class="flex font-semibold text-gray-600 text-sm mt-10">
         <svg class="fill-current mr-2 text-gray-600 w-4" viewBox="0 0 448 512">
           <path
